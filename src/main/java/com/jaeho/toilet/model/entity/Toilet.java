@@ -18,9 +18,11 @@ public class Toilet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long restroomId;
+    private Long toiletId;
 
     private String name;
+
+    private String address;
 
     @Column(nullable = false)
     private Double latitude;
@@ -28,12 +30,10 @@ public class Toilet {
     @Column(nullable = false)
     private Double longitude;
 
-    @Column(nullable = false)
-    private Boolean accessibility;
+    @Column(name = "isAvailable")
+    private Boolean isAvailable = true;
 
-    private String openingHours;
-
-    @Column(name="created_at", nullable = false, updatable = false)
+    @Column(name="created_at", updatable = false)
     @CreationTimestamp
     private Timestamp createdAt;
 
