@@ -36,6 +36,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((authorizeRequests) ->
                         authorizeRequests
                                 .requestMatchers("/login", "/join").permitAll()
+                                .requestMatchers("/test").hasAuthority("ROLE_ADMIN") // Only ADMIN role can access /test
                                 .anyRequest().authenticated() // This line ensures all other URLs are protected
                 )
                 .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

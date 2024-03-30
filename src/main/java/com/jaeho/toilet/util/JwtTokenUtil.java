@@ -26,7 +26,7 @@ public class JwtTokenUtil {
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY*1000))
-                .signWith(SignatureAlgorithm.HS256, secret)
+                .signWith(SignatureAlgorithm.HS256, secret.getBytes())
                 .compact();
     }
 
@@ -35,7 +35,7 @@ public class JwtTokenUtil {
     }
 
     private <T> T getClaimFromToken(String token, Function<Claims, T>claimsResolver){
-        Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        Claims claims = Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
         return claimsResolver.apply(claims);
     }
 
